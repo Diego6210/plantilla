@@ -3,7 +3,7 @@
   <div class=" row">
     <div class=" col-md-8">
       <div class=" card">
-        <div class=" card-header"><h5 class=" title">Edit Profile</h5></div>
+        <div class=" card-header"><h5 class=" title">Editar Prefil</h5></div>
         <div class=" card-body">
           <form>
             <div class=" row">
@@ -145,11 +145,15 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
             <div class=" block block-two"></div>
             <div class=" block block-three"></div>
             <div class=" block block-four"></div>
-            <a href="javascript:void(0)">
-              <img alt="..." class=" avatar" src="assets/img/emilyz.jpg" />
-
-              <h5 class=" title">Mike Andrew</h5>
+            <a>
+              <img alt="..." class=" avatar" src="{{imgdefault}}" />
+              <br>
+              <br>
+              <label for="">Cambiar Foto</label><br>
+              <input (change)="onChange($event)" accept="image/*" type="file" name="file" id="file" style="color: transparent;" value=""/>
             </a>
+            <br><br>
+            <h5 class=" title">Mike Andrew</h5>
             <p class=" description">Ceo/Co-Founder</p>
           </div>
           <div class=" card-description">
@@ -159,28 +163,18 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
           </div>
         </div>
         <div class=" card-footer">
-          <div class=" button-container">
-            <button
-              class=" btn btn-icon btn-round btn-facebook"
-              href="javascript:void(0)"
-            >
-              <i class=" fab fa-facebook"> </i>
-            </button>
-            <button
-              class=" btn btn-icon btn-round btn-twitter"
-              href="javascript:void(0)"
-            >
-              <i class=" fab fa-twitter"> </i>
-            </button>
-            <button
-              class=" btn btn-icon btn-round btn-google"
-              href="javascript:void(0)"
-            >
-              <i class=" fab fa-google-plus"> </i>
-            </button>
-          </div>
+          
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  #file{
+    width: 110px;
+    height: 25px;
+    overflow: hidden;
+  }
+  
+</style>

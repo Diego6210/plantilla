@@ -8,7 +8,7 @@
           <span class=" navbar-toggler-bar bar3"> </span>
         </button>
       </div>
-      <a class=" navbar-brand" href="javascript:void(0)"> {{ getTitle() }} </a>
+      <a class=" navbar-brand" > {{ getTitle() }} </a>
     </div>
     <button
       aria-label="Toggle navigation"
@@ -41,7 +41,6 @@
           <a
             class=" nav-link"
             data-toggle="dropdown"
-            href="javascript:void(0)"
             ngbDropdownToggle
           >
             <div class=" notification d-none d-lg-block d-xl-block"></div>
@@ -50,27 +49,27 @@
           </a>
           <ul class=" dropdown-menu-right dropdown-navbar" ngbDropdownMenu>
             <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
+              <a class=" nav-item" ngbDropdownItem>
                 Mike John responded to your email
               </a>
             </li>
             <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
+              <a class=" nav-item" ngbDropdownItem>
                 You have 5 more tasks
               </a>
             </li>
             <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
+              <a class=" nav-item" ngbDropdownItem>
                 Your friend Michael is in town
               </a>
             </li>
             <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
+              <a class=" nav-item" ngbDropdownItem>
                 Another notification
               </a>
             </li>
             <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
+              <a class=" nav-item" ngbDropdownItem>
                 Another one
               </a>
             </li>
@@ -80,18 +79,17 @@
           <a
             class=" nav-link"
             data-toggle="dropdown"
-            href="javascript:void(0)"
             ngbDropdownToggle
           >
             <div class=" photo">
-              <img alt="Profile Photo" src="assets/img/anime3.png" />
+              <img alt="Profile Photo" src="assets/img/default-avatar.png" />
             </div>
             <b class=" caret d-none d-lg-block d-xl-block"> </b>
             <p class=" d-lg-none">Log out</p>
           </a>
           <ul class=" dropdown-navbar" ngbDropdownMenu>
             <li class=" nav-link">
-              <a class=" nav-item" ngbDropdownItem>
+              <a (click)="Perfile()" class=" nav-item" ngbDropdownItem>
                 Profile
               </a>
             </li>
@@ -117,7 +115,7 @@
 <ng-template #content let-modal>
   <div class=" modal-header">
     <input
-      class=" form-control"
+      [(ngModel)]="Buscar"
       id="inlineFormInputGroup"
       placeholder="SEARCH"
       type="text"
@@ -128,9 +126,9 @@
       class=" close"
       data-dismiss="modal"
       type="button"
-      (click)="modal.dismiss('Cross click')"
+      (click)="Search()"
     >
-      <i class=" tim-icons icon-simple-remove"> </i>
+      <i class="tim-icons icon-zoom-split"> </i>
     </button>
   </div>
 

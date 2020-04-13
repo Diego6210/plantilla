@@ -13,19 +13,27 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
 import { LoginComponent } from './pages/login/login.component';
+import {WebcamModule} from 'ngx-webcam';
+import {BrowserModule} from '@angular/platform-browser';
+import { UsersComponent } from './pages/users/users.component';
 
+import { DataTablesModule } from 'angular-datatables';
+import { ForgotPaswordComponent } from './pages/forgot-pasword/forgot-pasword.component';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     FormsModule,
+    BrowserModule,
     HttpClientModule,
     ComponentsModule,
     NgbModule,
     RouterModule,
     AppRoutingModule,
+    WebcamModule,
+    DataTablesModule,
     ToastrModule.forRoot()
   ],
-  declarations: [AppComponent, AdminLayoutComponent, LoginComponent],
+  declarations: [AppComponent, AdminLayoutComponent, LoginComponent, UsersComponent, ForgotPaswordComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

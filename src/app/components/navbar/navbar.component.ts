@@ -18,6 +18,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public isCollapsed = true;
 
+  Buscar:any;
+
   closeResult: string;
 
   constructor(
@@ -193,6 +195,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   LogOut(){
     this.router.navigateByUrl('login');
+  }
+
+  Perfile()
+  {
+    this.router.navigateByUrl('/user');
+  }
+
+  Search(){
+    //for(var i = 0; i < 10; i++)
+    //{
+      //if(this.search == this.search) 
+      console.log( this.Buscar );
+        //this.router.navigateByUrl('/' + this.search );
+    //}
   }
 
   ngOnDestroy(){

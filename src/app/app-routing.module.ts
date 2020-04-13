@@ -5,6 +5,7 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { LoginComponent } from './pages/login/login.component';
+import { ForgotPaswordComponent } from './pages/forgot-pasword/forgot-pasword.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
   { 
     path: 'login', 
     component: LoginComponent 
+  },
+  {
+    path: 'ForgotPasword', 
+    component: ForgotPaswordComponent 
   },
   {
     path: "",

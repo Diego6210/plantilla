@@ -1,0 +1,225 @@
+
+<div class=" content">
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card">
+        <div class=" card-header"><h5 class=" title">Usuarios</h5></div>
+        <div class=" card-body">
+
+          <button class="btn btn-primary mb-2 mr-2" (click)="openLg(content)"><i class="fa fa-user-plus"></i> Agregar Usuario</button>
+
+          <br><br>
+          
+          <table datatable class="row-border hover">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>First name</th>
+                  <th>Last name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Foo</td>
+                  <td>Bar</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Someone</td>
+                  <td>Youknow</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Iamout</td>
+                  <td>Ofinspiration</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>Yoda</td>
+                  <td>Skywalker</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>Patrick</td>
+                  <td>Dupont</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>Barack</td>
+                  <td>Obama</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>François</td>
+                  <td>Holland</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>Michel</td>
+                  <td>Popo</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>Chuck</td>
+                  <td>Norris</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>Simon</td>
+                  <td>Robin</td>
+                </tr>
+                <tr>
+                  <td>11</td>
+                  <td>Louis</td>
+                  <td>Lin</td>
+                </tr>
+                <tr>
+                  <td>12</td>
+                  <td>Zelda</td>
+                  <td>Link</td>
+                </tr>
+              </tbody>
+            </table>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<style>
+.modal-body,.modal-header,  .modal-footer{
+  background-color:#1b1d1e;
+}
+label, h4{
+  color: #ffffff;
+}
+</style>
+
+<ng-template #content let-modal class=" form-control-modal">
+  <div class="modal-header">
+    <h4 style="color: #ffffff;" class="modal-title">Agregar Usuario </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span style="color: red;" aria-hidden="true">&times;</span>
+    </button>
+    <br>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class=" row">
+        <div class=" col-md-5 pr-md-1">
+          <div class=" form-group">
+            <label> Company</label>
+            <input
+              class=" form-control"
+              placeholder="Company"
+              type="text"
+              value="Creative Code Inc."
+            />
+          </div>
+        </div>
+        <div class=" col-md-3 px-md-1">
+          <div class=" form-group">
+            <label> Username </label>
+            <input
+              class=" form-control"
+              placeholder="Username"
+              type="text"
+              value="michael23"
+            />
+          </div>
+        </div>
+        <div class=" col-md-4 pl-md-1">
+          <div class=" form-group">
+            <label for="exampleInputEmail1"> Email address </label>
+            <input
+              class=" form-control"
+              placeholder="mike@email.com"
+              type="email"
+            />
+          </div>
+        </div>
+      </div>
+      <div class=" row">
+        <div class=" col-md-6 pr-md-1">
+          <div class=" form-group">
+            <label> First Name </label>
+            <input
+              class=" form-control"
+              placeholder="Company"
+              type="text"
+              value="Mike"
+            />
+          </div>
+        </div>
+        <div class=" col-md-6 pl-md-1">
+          <div class=" form-group">
+            <label> Last Name </label>
+            <input
+              class=" form-control"
+              placeholder="Last Name"
+              type="text"
+              value="Andrew"
+            />
+          </div>
+        </div>
+      </div>
+      <div class=" row">
+        <div class=" col-md-12">
+          <div class=" form-group">
+            <label> Address </label>
+            <input
+              class=" form-control"
+              placeholder="Home Address"
+              type="text"
+              value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+            />
+          </div>
+        </div>
+      </div>
+      <div class=" row">
+        <div class=" col-md-4 pr-md-1">
+          <div class=" form-group">
+            <label> City </label>
+            <input
+              class=" form-control"
+              placeholder="City"
+              type="text"
+              value="Mike"
+            />
+          </div>
+        </div>
+        <div class=" col-md-4 px-md-1">
+          <div class=" form-group">
+            <label> Country </label>
+            <input
+              class=" form-control"
+              placeholder="Country"
+              type="text"
+              value="Andrew"
+            />
+          </div>
+        </div>
+        <div class=" col-md-4 pl-md-1">
+          <div class=" form-group">
+            <label> Postal Code </label>
+            <input
+              class=" form-control"
+              placeholder="ZIP Code"
+              type="number"
+            />
+          </div>
+        </div>
+      </div>
+    </form>
+    
+  </div>
+  <div class="modal-footer">
+    <br><br>
+    <button type="button" class="btn btn-danger" (click)="Agregar()">Agregar</button>
+  </div>
+</ng-template>
+
