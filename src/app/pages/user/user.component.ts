@@ -1,18 +1,25 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { LocalStorageService } from 'src/app/service/local-storage.service';
 
 @Component({
   selector: "app-user",
   templateUrl: "user.component.html"
 })
 export class UserComponent implements OnInit {
-  constructor() {
+  constructor(    
+    private storage: LocalStorageService
+  ) {
    
   }
 
   imgdefault='assets/img/default-avatar.png';
-  
-  ngOnInit() {}
+  cheange = false;
+  Username:string;
+
+  ngOnInit() {
+    this.Username = this.storage.getStorage('User');
+  }
 
   onChange($event){
     console.log($event.srcElement.value);
@@ -25,7 +32,7 @@ export class UserComponent implements OnInit {
       reader.onload = ($event:any) => {
         this.imgdefault = $event.target.result;
       }
-
+      this.cheange = true;
       reader.readAsDataURL($event.target.files[0]);
     }
   }

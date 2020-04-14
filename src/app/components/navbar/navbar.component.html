@@ -1,3 +1,9 @@
+<style>
+  .dropdown-menu-right, .dropdown-navbar, .modal-header{
+    background-color:#16191b;
+  }
+</style>
+
 <nav class=" navbar navbar-expand-lg navbar-absolute navbar-transparent">
   <div class=" container-fluid">
     <div class=" navbar-wrapper">
@@ -23,7 +29,7 @@
       <span class=" navbar-toggler-bar navbar-kebab"> </span>
       <span class=" navbar-toggler-bar navbar-kebab"> </span>
     </button>
-    <div class=" navbar-collapse" [ngbCollapse]="isCollapsed" id="navigation">
+    <div style="display: none;" class=" navbar-collapse" [ngbCollapse]="isCollapsed" id="navigation">
       <ul class=" navbar-nav ml-auto">
         <li class=" search-bar input-group">
           <button

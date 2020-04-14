@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public isCollapsed = true;
 
-  Buscar:any;
+  Buscar:string='';
 
   closeResult: string;
 
@@ -206,7 +206,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     //for(var i = 0; i < 10; i++)
     //{
       //if(this.search == this.search) 
-      console.log( this.Buscar );
+          console.log( this.Buscar.toString() );
         //this.router.navigateByUrl('/' + this.search );
     //}
   }

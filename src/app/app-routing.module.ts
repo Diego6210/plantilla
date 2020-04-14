@@ -6,6 +6,8 @@ import { Routes, RouterModule } from "@angular/router";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { LoginComponent } from './pages/login/login.component';
 import { ForgotPaswordComponent } from './pages/forgot-pasword/forgot-pasword.component';
+import { IndexComponent } from './pages/index/index.component';
+import { Found404Component } from './pages/found404/found404.component';
 
 
 const routes: Routes = [
@@ -23,6 +25,14 @@ const routes: Routes = [
     component: ForgotPaswordComponent 
   },
   {
+    path: 'Index', 
+    component: IndexComponent 
+  },
+  {
+    path: '404', 
+    component: Found404Component 
+  },
+  {
     path: "",
     component: AdminLayoutComponent,
     children: [
@@ -35,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "login"
+    redirectTo: "404"
   }
 ];
 
@@ -44,7 +54,9 @@ const routes: Routes = [
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes, {
-      useHash: true
+      useHash: true,
+      anchorScrolling: "enabled",
+      scrollPositionRestoration: 'enabled'
     })
   ],
   exports: [RouterModule]

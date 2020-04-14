@@ -1,4 +1,36 @@
+<style>
+  .body-table{
+    background-color: #141516;
+  }
 
+  .row-border{
+    background-color: #242525;
+  }
+
+  td{
+    color: #ffffff;
+  }
+
+  
+
+  tbody tr{
+    background-color: #212122;
+  }
+
+
+  tbody tr:hover{
+    background-color: #333335;
+  }
+
+  tbody tr td:hover{
+    background-color: #333335;
+  }
+
+  .dataTables_info{
+        color: rgb(255, 255, 255);
+}
+
+</style>
 <div class=" content">
   <div class=" row">
     <div class=" col-md-12">
@@ -10,7 +42,7 @@
 
           <br><br>
           
-          <table datatable class="row-border hover">
+          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="body-table">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -92,7 +124,7 @@
 
 <style>
 .modal-body,.modal-header,  .modal-footer{
-  background-color:#1b1d1e;
+  background-color:#16191b;
 }
 label, h4{
   color: #ffffff;
@@ -110,35 +142,33 @@ label, h4{
   <div class="modal-body">
     <form>
       <div class=" row">
-        <div class=" col-md-5 pr-md-1">
-          <div class=" form-group">
-            <label> Company</label>
-            <input
-              class=" form-control"
-              placeholder="Company"
-              type="text"
-              value="Creative Code Inc."
-            />
-          </div>
-        </div>
-        <div class=" col-md-3 px-md-1">
+        <div class=" col-md-3 pr-md-1">
           <div class=" form-group">
             <label> Username </label>
             <input
               class=" form-control"
               placeholder="Username"
               type="text"
-              value="michael23"
             />
           </div>
         </div>
-        <div class=" col-md-4 pl-md-1">
+        <div class=" col-md-4 px-md-1">
           <div class=" form-group">
             <label for="exampleInputEmail1"> Email address </label>
             <input
               class=" form-control"
               placeholder="mike@email.com"
               type="email"
+            />
+          </div>
+        </div>
+        <div class=" col-md-5 pl-md-1">
+          <div class=" form-group">
+            <label> Password</label>
+            <input
+              class=" form-control"
+              placeholder="Password"
+              type="text"
             />
           </div>
         </div>
@@ -151,7 +181,6 @@ label, h4{
               class=" form-control"
               placeholder="Company"
               type="text"
-              value="Mike"
             />
           </div>
         </div>
@@ -162,7 +191,6 @@ label, h4{
               class=" form-control"
               placeholder="Last Name"
               type="text"
-              value="Andrew"
             />
           </div>
         </div>
@@ -175,7 +203,6 @@ label, h4{
               class=" form-control"
               placeholder="Home Address"
               type="text"
-              value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
             />
           </div>
         </div>
@@ -188,7 +215,6 @@ label, h4{
               class=" form-control"
               placeholder="City"
               type="text"
-              value="Mike"
             />
           </div>
         </div>
@@ -199,7 +225,6 @@ label, h4{
               class=" form-control"
               placeholder="Country"
               type="text"
-              value="Andrew"
             />
           </div>
         </div>
@@ -219,7 +244,7 @@ label, h4{
   </div>
   <div class="modal-footer">
     <br><br>
-    <button type="button" class="btn btn-danger" (click)="Agregar()">Agregar</button>
+    <button type="button" class="btn btn-danger" (click)="Agregar('top', 'center')">Agregar</button>
   </div>
 </ng-template>
 
