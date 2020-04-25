@@ -21,6 +21,9 @@ import { DataTablesModule } from 'angular-datatables';
 import { ForgotPaswordComponent } from './pages/forgot-pasword/forgot-pasword.component';
 import { IndexComponent } from './pages/index/index.component';
 import { Found404Component } from './pages/found404/found404.component';
+import { MensagesComponent } from './pages/mensages/mensages.component';
+
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -35,7 +38,7 @@ import { Found404Component } from './pages/found404/found404.component';
     DataTablesModule,
     ToastrModule.forRoot()
   ],
-  declarations: [AppComponent, AdminLayoutComponent, LoginComponent, UsersComponent, ForgotPaswordComponent, IndexComponent, Found404Component],
+  declarations: [AppComponent, AdminLayoutComponent, LoginComponent, UsersComponent, ForgotPaswordComponent, IndexComponent, Found404Component, MensagesComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -18,6 +18,12 @@ export const ROUTES: RouteInfo[] = [
     title: "Usuarios",
     icon: "icon-single-02",
     class: ""
+  },
+  {
+    path: "/message",
+    title: "Mensajes",
+    icon: "icon-chat-33",
+    class: ""
   }
 ];
 

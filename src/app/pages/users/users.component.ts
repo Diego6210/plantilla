@@ -16,7 +16,7 @@ export class UsersComponent implements OnInit {
   ) {}
 
   openLg(content) {
-    this.modalService.open(content, { size: 'lg' ,  windowClass: 'dark-modal' });
+    this.modalService.open(content, { size: 'lg' });
   }
 
   Agregar(from, align){

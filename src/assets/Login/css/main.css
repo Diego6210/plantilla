@@ -38,7 +38,9 @@
 
 body, html {
   height: 100%;
-  background-color: rgb(22, 23, 24);
+  /*background-color: rgb(22, 23, 24);*/
+  background-color : rgb(43, 45, 65)   !important;  
+    border:  rgb(57, 59, 80)   !important ;
   font-family: Poppins-Regular, sans-serif;
 }
 
@@ -47,7 +49,7 @@ a {
 	font-family: Poppins-Regular;
 	font-size: 14px;
 	line-height: 1.7;
-	color: #666666;
+	color:rgb(57, 59, 80); /* #666666;*/
 	margin: 0px;
 	transition: all 0.4s;
 	-webkit-transition: all 0.4s;
@@ -73,7 +75,7 @@ p {
 	font-family: Poppins-Regular;
 	font-size: 14px;
 	line-height: 1.7;
-	color: #666666;
+	color: rgb(57, 59, 80); /* #666666;*/
 	margin: 0px;
 }
 
@@ -179,13 +181,13 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #15171a;
+  background: rgb(43, 45, 65) ; /*#15171a;*/
 }
 
 
 .wrap-login100 {
   width: 670px;
-  background: #222629;
+  background: rgb(57, 59, 80) ;/*#222629;*/
   border-radius: 10px;
   overflow: hidden;
   position: relative;
@@ -418,7 +420,7 @@ input.input100 {
 }
 
 .login100-form-btn:hover {
-  background-color: #333333;
+  background-color: rgb(76, 78, 99); /* #333333;*/
 }
 
 

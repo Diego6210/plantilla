@@ -29,20 +29,9 @@
       <span class=" navbar-toggler-bar navbar-kebab"> </span>
       <span class=" navbar-toggler-bar navbar-kebab"> </span>
     </button>
-    <div style="display: none;" class=" navbar-collapse" [ngbCollapse]="isCollapsed" id="navigation">
+    <div class=" navbar-collapse" [ngbCollapse]="isCollapsed" id="navigation">
       <ul class=" navbar-nav ml-auto">
-        <li class=" search-bar input-group">
-          <button
-            class=" btn btn-link"
-            data-target="#searchModal"
-            data-toggle="modal"
-            (click)="open(content)"
-            id="search-button"
-          >
-            <i class=" tim-icons icon-zoom-split"> </i>
-            <span class=" d-lg-none d-md-block"> Search </span>
-          </button>
-        </li>
+        
         <li class=" nav-item" ngbDropdown>
           <a
             class=" nav-link"
@@ -50,7 +39,7 @@
             ngbDropdownToggle
           >
             <div class=" notification d-none d-lg-block d-xl-block"></div>
-            <i class=" tim-icons icon-sound-wave"> </i>
+            <i class=" tim-icons icon-bell-55"> </i>
             <p class=" d-lg-none">Notifications</p>
           </a>
           <ul class=" dropdown-menu-right dropdown-navbar" ngbDropdownMenu>
@@ -117,25 +106,3 @@
     </div>
   </div>
 </nav>
-
-<ng-template #content let-modal>
-  <div class=" modal-header">
-    <input
-      [(ngModel)]="Buscar"
-      id="inlineFormInputGroup"
-      placeholder="SEARCH"
-      type="text"
-    />
-
-    <button
-      aria-label="Close"
-      class=" close"
-      data-dismiss="modal"
-      type="button"
-      (click)="Search()"
-    >
-      <i class="tim-icons icon-zoom-split"> </i>
-    </button>
-  </div>
-
-</ng-template>

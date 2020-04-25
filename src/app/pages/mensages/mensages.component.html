@@ -1,0 +1,128 @@
+
+
+<div class=" content">
+    <div class=" row">
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header"><h5 class=" title">Menseger</h5></div>
+          <div class=" card-body">
+          
+
+            <div class="container">
+
+                <div class="row rounded-lg overflow-hidden shadow">
+                    <!-- Users box-->
+                    <div class="col-md-5 col-sm-3 px-0">
+                        <div class="bg-white">
+
+                            <div class="bg-gray px-4 py-3 dark-ligth">
+                                <p class="h5 mb-0 py-1">Chats <button (click)="openModal(content)" style="float:left; float: right; color: white;"><i class="fas fa-plus-circle fa-2x"></i></button></p>
+                            </div>
+
+                            <div class="messages-box">
+                                <div class="list-group rounded-0">
+
+                                    <a  (click)="selectUser(chats.usuario,chats.img)" *ngFor="let chats of Chats" [ngClass]="{'active text-white rounded-0' : chats.usuario == UsernameSend,'dark list-group-item-light rounded-0' : chats.usuario != UsernameSend}" class="list-group-item list-group-item-action">
+                                        <div class="media">
+                                            <img src="{{chats.img}}" alt="user" width="50" class="rounded-circle">
+                                            <div class="media-body ml-4">
+                                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                                    <h6 class="mb-0">{{chats.usuario}}</h6><small class="small font-weight-bold">{{chats.fecha}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Chat Box-->
+                    <div class="col-md-7 col-sm-7 px-0">
+                        <div class="bg-gray px-4 py-2 dark-ligth">
+                            <p class="h5 mb-0 py-1">
+                                <img *ngIf="UserimgSend != null" src="{{UserimgSend}}" alt="user" width="50" style="right: 10px;"  class="rounded-circle">  <b style="text-align:center">{{UsernameSend}}</b> 
+                            </p>
+                        </div>
+                        <div class="px-4 py-5 chat-box bg-white">
+
+                            <!-- Message-->
+                            <div *ngIf="UserimgSend != null">
+                                <div *ngFor="let mensajes of Mensajes" [ngClass]="{'ml-auto' : mensajes.usuario == Username}" class="media w-50 mb-3">
+                                    <div [ngClass]="{'ml-3' : mensajes.usuario != Username}" class="media-body">
+                                        <div class="bg-info rounded py-2 px-3 mb-2">
+                                            <p class="text-small mb-0 text-white">{{mensajes.message}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    <!-- Typing area -->
+                    <form action="#" class="dark-ligth">
+                        <div class="input-group">
+                            <input (keyup.enter)="SendMenssege()" type="text" placeholder="Escribe un mensaje" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 dark-ligth">
+                            <div class="input-group-append">
+                                <button (click)="SendMenssege()" id="button-addon2" type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
+                            </div>
+                        </div>
+                    </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class=" modal-header">
+      <h4 style="color: #ffffff;" class="modal-title" id="modal-basic-title">Hi there!</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span style="color: red;" aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        
+        <div class="row rounded-lg overflow-hidden shadow">
+            <!-- Users box-->
+            <div class="col-12 px-0">
+                <div class="bg-white">
+
+                    <a *ngFor="let chats of Chats" class="dark list-group-item list-group-item-action list-group-item-light rounded-0">
+                        <div class="media">
+                            <img src="{{chats.img}}" alt="user" width="50" class="rounded-circle">
+                            <div class="media-body ml-4">
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <h6 class="mb-0">{{chats.usuario}}</h6><small class="small font-weight-bold">{{chats.fecha}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+    </div>
+  </ng-template>
+  
+  <style>
+
+    .modal-body,.modal-header,  .modal-footer{
+        background-color : rgb(57, 59, 88)  !important;  
+        border: none;
+    }
+    
+  </style>

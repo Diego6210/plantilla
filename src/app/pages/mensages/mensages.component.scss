@@ -1,0 +1,47 @@
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    width: 5px;
+    background: rgb(57, 59, 80);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    width: 1em;
+    background-color: rgb(131, 127, 127);
+    outline: 1px solid rgb(89, 94, 99);
+    border-radius: 1rem;
+  }
+  
+  .text-small {
+    font-size: 0.9rem;
+  }
+  
+  .messages-box,
+  .chat-box {
+    height: 510px;
+    overflow-y: scroll;
+    background-color: #27293d !important;
+  }
+
+  .active{
+    background-color : #1d8cf8   !important;  
+    border: blue;
+  }
+  
+  input::placeholder {
+    font-size: 0.9rem;
+    color: #999;
+  }
+
+  .dark-ligth{
+    background-color : rgb(50, 52, 80)  !important;  
+    border:  rgb(61, 63, 78)   !important ;
+  }
+
+  .dark{
+    background-color : rgb(43, 45, 65)   !important;  
+    border:  rgb(57, 59, 80)   !important ;
+  }
