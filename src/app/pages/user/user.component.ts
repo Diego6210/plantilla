@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
+import { ServerService } from 'src/app/service/server.service';
 
 @Component({
   selector: "app-user",
@@ -8,23 +9,24 @@ import { LocalStorageService } from 'src/app/service/local-storage.service';
 })
 export class UserComponent implements OnInit {
   constructor(    
-    private storage: LocalStorageService
+    private storage: LocalStorageService,
+    private server:ServerService
   ) {
-   
+  
   }
 
-  imgdefault='assets/img/default-avatar.png';
+  imgdefault = this.storage.getStorage('Img')
   cheange = false;
   Username:string;
+  routerServer = 'http://localhost:3000/upload/'+ this.Username;
+  formData = new FormData();
 
   ngOnInit() {
     this.Username = this.storage.getStorage('User');
   }
 
-  onChange($event){
-    console.log($event.srcElement.value);
+  onChange($event,Archivo: FileList){
     console.log($event);
-    //this.imgdefault=$event.srcElement.value;
 
     if ($event.target.files) {
       var reader = new FileReader();
@@ -34,6 +36,15 @@ export class UserComponent implements OnInit {
       }
       this.cheange = true;
       reader.readAsDataURL($event.target.files[0]);
+      
+
+      this.formData.delete('archivo');
+      this.formData.append('archivo', Archivo[0]);
+
     }
   }
+  
+  onSubmit() {
+    this.server.uploadFile(this.formData,this.Username).subscribe((data) =>{ console.log(data)});    
+  }  
 }

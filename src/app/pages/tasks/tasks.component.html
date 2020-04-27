@@ -1,0 +1,53 @@
+
+
+<div class=" content">
+    <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card card-tasks">
+        <div class=" card-header">
+            <h5 class=" title d-inline">Tareas</h5>
+            <!--<p class=" card-category d-inline">today</p>-->
+        </div>
+        <div class=" card-body">
+          <div class=" table-full-width table-responsive">
+            
+            
+            <table class=" table">
+              <tbody>
+
+                <tr *ngFor="let task of Tasks">
+
+                  <td>
+                    <div class=" form-check">
+                      <label class=" form-check-label">
+                        <input (change)="ChangeTalks(task.IdTarea,task.Completado)" checked="{{task.Completado}}" values="{{task.Completado}}" class=" form-check-input" type="checkbox"/>
+                        <span class=" form-check-sign"><span class=" check"> </span></span>
+                      </label>
+                    </div>
+                  </td>
+
+                  <td>
+                    <p class=" title">{{task.Titulo}}</p>
+                    <p class=" text-muted">
+                      {{task.Tarea}}
+                    </p>
+                  </td>
+                  
+                  <td class=" td-actions text-right">
+                    <button (click)="ChangeTalks(task.IdTarea)" class=" btn btn-link" type="button" placement="left" ngbTooltip="Edit Task" container="body" >
+                      <i class=" tim-icons icon-pencil"> </i>
+                    </button>
+                  </td>
+
+                </tr>
+
+
+              </tbody>
+            </table>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

@@ -22,6 +22,9 @@ import { ForgotPaswordComponent } from './pages/forgot-pasword/forgot-pasword.co
 import { IndexComponent } from './pages/index/index.component';
 import { Found404Component } from './pages/found404/found404.component';
 import { MensagesComponent } from './pages/mensages/mensages.component';
+import { TasksComponent } from './pages/tasks/tasks.component';
+import { ServerService } from './service/server.service';
+
 
 
 @NgModule({
@@ -38,8 +41,8 @@ import { MensagesComponent } from './pages/mensages/mensages.component';
     DataTablesModule,
     ToastrModule.forRoot()
   ],
-  declarations: [AppComponent, AdminLayoutComponent, LoginComponent, UsersComponent, ForgotPaswordComponent, IndexComponent, Found404Component, MensagesComponent],
-  providers: [],
+  declarations: [AppComponent, AdminLayoutComponent, LoginComponent, UsersComponent, ForgotPaswordComponent, IndexComponent, Found404Component, MensagesComponent, TasksComponent],
+  providers: [ServerService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

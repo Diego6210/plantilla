@@ -138,11 +138,12 @@
     </div>
     <div class=" col-md-4">
       <div class=" card card-user">
-        <div class=" card-body">
-          <p class=" card-text"></p>
-          <div class=" author">
-            <div class=" block block-one"></div>
-            <div class=" block block-two"></div>
+        <form action="" (ngSubmit)="onSubmit()">
+          <div class=" card-body">
+            <p class=" card-text"></p>
+            <div class=" author">
+              <div class=" block block-one"></div>
+              <div class=" block block-two"></div>
             <div class=" block block-three"></div>
             <div class=" block block-four"></div>
             <a>
@@ -150,22 +151,24 @@
               <br>
               <br>
               <label for="">Cambiar Foto</label><br>
-              <input (change)="onChange($event)" accept="image/*" type="file" name="file" id="file" style="color: transparent;" value=""/>
+              <input (change)="onChange($event,$event.target.files)" accept="image/*"  type="file" name="archivo" id="archivo" style="color: transparent;" value=""/>
             </a>
             <br><br>
             <h5 class=" title">{{FirstName}} {{LastName}}</h5>
           </div>
         </div>
         <div *ngIf="cheange" class=" card-footer">
-          <button class=" btn btn-fill btn-primary" type="submit">Save</button>
+          <input   class=" btn btn-fill btn-primary" type="submit" values='Save'>
         </div>
+        
+        </form>
       </div>
     </div>
   </div>
 </div>
 
 <style>
-  #file{
+  #archivo{
     width: 110px;
     height: 25px;
     overflow: hidden;

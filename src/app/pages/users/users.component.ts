@@ -15,6 +15,28 @@ export class UsersComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
+  Usuarios = [
+    {
+      Usuario:'diego',
+      img:'https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg',
+      nombre:'diego',
+      apellido:'garcia',
+      id:1      
+    },{
+      Usuario:'nose',
+      img:'https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg',
+      nombre:'nose',
+      apellido:'nose',
+      id:2     
+    },{
+      Usuario:'juean',
+      img:'https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg',
+      nombre:'juan',
+      apellido:'perez',
+      id:3      
+    },
+  ];
+
   openLg(content) {
     this.modalService.open(content, { size: 'lg' });
   }
@@ -35,6 +57,14 @@ export class UsersComponent implements OnInit {
     });    
   }
 
+  Delet(idUser){
+    alert('Delet ' + idUser)
+  }
+
+  Edits(idUser){
+    alert('edits ' + idUser)
+
+  }
   ngOnInit(): void {
   }
 
