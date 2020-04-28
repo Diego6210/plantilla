@@ -1,11 +1,12 @@
 
 
 <div class=" content">
-    <div class=" row">
+  <div class=" row">
     <div class=" col-md-12">
       <div class=" card card-tasks">
         <div class=" card-header">
-            <h5 class=" title d-inline">Tareas</h5>
+            <br>
+            <h5 class=" title d-inline">Tareas <button (click)="openTaskModal(content)" style="float:left; float: right; right: 20%;color: white;"><i class="fas fa-plus-circle fa-2x"></i></button></h5>
             <!--<p class=" card-category d-inline">today</p>-->
         </div>
         <div class=" card-body">
@@ -27,7 +28,7 @@
                   </td>
 
                   <td>
-                    <p class=" title">{{task.Titulo}}</p>
+                    <p class=" title">{{task.Titulo}}  -  {{task.Fecha}}</p>
                     <p class=" text-muted">
                       {{task.Tarea}}
                     </p>
@@ -51,3 +52,49 @@
       </div>
     </div>
 </div>
+
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class=" modal-header">
+    <h4 style="color: #ffffff;" class="modal-title" id="modal-basic-title">Nueva Tarea</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span style="color: red;" aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      
+    <div class=" row">
+      <div class=" col-6">
+        <div class=" form-group">
+          <label style="color: white;"> Titulo:</label>
+          <input [(ngModel)]="Titulo" class=" form-control" placeholder="Titulo" type="text"/>
+        </div> 
+        <div class=" form-group">
+          <label style="color: white;"> Fecha:</label>
+          <input [(ngModel)]="Fecha" class=" form-control"  type="date" name="Fecha" id="Fecha">
+        </div>   
+      </div>      
+      <div class=" col-6">
+        <label style="color: white;"> Tarea:</label>
+        <textarea [(ngModel)]="Tarea" name="Tarea" id="Tarea" class="form-control" style="background-color: white;color: black;" rows="8"></textarea>   
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="SaveTask()">Save</button>
+  </div>
+</ng-template>
+
+<style>
+
+  .modal-body,.modal-header,  .modal-footer{
+      background-color : rgb(57, 59, 88)  !important;  
+      border: none;
+  }
+  input{
+      background-color : rgb(53, 54, 77)  !important;  
+  }
+  
+</style>

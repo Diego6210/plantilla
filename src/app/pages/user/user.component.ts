@@ -19,6 +19,7 @@ export class UserComponent implements OnInit {
   cheange = false;
   Username:string;
   routerServer = 'http://localhost:3000/upload/'+ this.Username;
+  IMG:string;
   formData = new FormData();
 
   ngOnInit() {
@@ -26,7 +27,13 @@ export class UserComponent implements OnInit {
   }
 
   onChange($event,Archivo: FileList){
-    console.log($event);
+    //console.log($event);
+
+    
+    //console.log(Archivo);
+    var estencion = Archivo[0].name.split('.', 2)
+    //console.log(estencion[1]);
+    this.IMG = this.Username+'.'+estencion[1];
 
     if ($event.target.files) {
       var reader = new FileReader();
@@ -45,6 +52,8 @@ export class UserComponent implements OnInit {
   }
   
   onSubmit() {
-    this.server.uploadFile(this.formData,this.Username).subscribe((data) =>{ console.log(data)});    
+    this.server.uploadFile(this.formData,this.Username).subscribe((data) =>{ console.log(data)});
+    
+    this.server.setUsuarioIMG(this.IMG,this.Username).subscribe((data) => {console.log(data)});
   }  
 }

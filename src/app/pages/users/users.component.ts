@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
+import { ServerService } from 'src/app/service/server.service';
 
 @Component({
   selector: 'app-users',
@@ -9,33 +11,41 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class UsersComponent implements OnInit {
 
-  
+  private url: string = environment.Server+'imagen/';
+  Usuarios = [];
+
   constructor(
     private modalService: NgbModal,
-    private toastr: ToastrService
-  ) {}
+    private toastr: ToastrService,
+    private server:ServerService
+  ) {
+    this.Usuarios.push(
+      {
+        Usuario:'juean',
+        img:'https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg',
+        nombre:'juan',
+        apellido:'perez',
+        id:3      
+      });
+    this.server.getUsuarios().subscribe((data) => {
+      this.Usuarios = [];
+      for(let i = 0; i <= Object.keys(data).length; i++){
 
-  Usuarios = [
-    {
-      Usuario:'diego',
-      img:'https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg',
-      nombre:'diego',
-      apellido:'garcia',
-      id:1      
-    },{
-      Usuario:'nose',
-      img:'https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg',
-      nombre:'nose',
-      apellido:'nose',
-      id:2     
-    },{
-      Usuario:'juean',
-      img:'https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg',
-      nombre:'juan',
-      apellido:'perez',
-      id:3      
-    },
-  ];
+        this.Usuarios.push({
+          Usuario: data['Usuario'][i].Usuario,
+          img: this.url+data['Usuario'][i].Img,
+          nombre: data['Usuario'][i].Nombre,
+          apellido: data['Usuario'][i].Apellido,
+          id: data['Usuario'][i].IdUsuario,
+          Email: data['Usuario'][i].Email
+        });
+      }
+    });
+
+  }
+
+  
+  
 
   openLg(content) {
     this.modalService.open(content, { size: 'lg' });

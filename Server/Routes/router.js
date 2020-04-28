@@ -13,27 +13,9 @@ app.use(function(req, res, next) {
 });
 
 
-
-app.post('/Login', function(req, res) {
-
-    let body = req.body;
-
-    if (body.usuario === undefined) {
-
-        res.status(400).json({
-            ok: false,
-            mensaje: 'El nombre es necesario'
-        });
-
-    } else {
-        res.json({
-            persona: body
-        });
-    }
-
-});
-
 app.use(require('./Upload'));
+app.use(require('./Usuarios'));
+app.use(require('./Public'));
 
 
 

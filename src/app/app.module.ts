@@ -24,6 +24,9 @@ import { Found404Component } from './pages/found404/found404.component';
 import { MensagesComponent } from './pages/mensages/mensages.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { ServerService } from './service/server.service';
+import { ServerSocketService } from './service/server-socket.service';
+import { NotificacionesComponent } from './pages/notificaciones/notificaciones.component';
+import { AssignTasksComponent } from './pages/assign-tasks/assign-tasks.component';
 
 
 
@@ -41,8 +44,8 @@ import { ServerService } from './service/server.service';
     DataTablesModule,
     ToastrModule.forRoot()
   ],
-  declarations: [AppComponent, AdminLayoutComponent, LoginComponent, UsersComponent, ForgotPaswordComponent, IndexComponent, Found404Component, MensagesComponent, TasksComponent],
-  providers: [ServerService],
+  declarations: [AppComponent, AdminLayoutComponent, LoginComponent, UsersComponent, ForgotPaswordComponent, IndexComponent, Found404Component, MensagesComponent, TasksComponent, NotificacionesComponent, AssignTasksComponent],
+  providers: [ServerService,ServerSocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

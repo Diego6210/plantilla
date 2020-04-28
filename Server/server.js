@@ -2,18 +2,24 @@ require('./Config/config');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const socketIO = require('socket.io');
+const http = require('http');
+
 
 
 const app = express();
+let server = http.createServer(app);
+module.exports.io = socketIO(server);
+require('./Socket/socket');
+
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(require('./Routes/router'));
-//app.use(express.static(__dirname + '../Image'));
 
 
 
-app.listen(process.env.PORT, () =>{
+server.listen(process.env.PORT, () =>{
     console.log("Corriendo en el puerto 3000")
 });

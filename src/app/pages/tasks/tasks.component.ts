@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-tasks',
@@ -7,19 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TasksComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private modalService: NgbModal
+  ) { }
+
+  Tarea:string;
+  Titulo:string;
+  Fecha:string;
 
   Tasks = [
     {
       IdTarea:1,
       Titulo:'tarea 1',
       Tarea:'nose que mas',
+      Fecha:'27/04/2019',
       Completado:true
     },
     {
       IdTarea:2,
       Titulo:'tarea 2',
       Tarea:'nose',
+      Fecha:'27/04/2019',
       Completado:false
     }
   ];
@@ -35,4 +44,12 @@ export class TasksComponent implements OnInit {
     alert('edits '+task);
   }
 
+  openTaskModal(content){
+    this.modalService.open(content);
+  }
+
+  SaveTask(){
+    this.modalService.dismissAll();
+    alert(this.Titulo + '-' + this.Fecha);
+  }
 }

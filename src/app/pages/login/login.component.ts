@@ -26,13 +26,19 @@ export class LoginComponent implements OnInit {
   }
 
   Login(){
-    console.log(this.Username);
-    this.server.Login(this.Username).subscribe((data)=>{
-      console.log(data);
+    this.server.getUsuariobyUsuario(this.Username).subscribe((data)=>{
+
+      if(Object.keys(data).length == 0){
+        alert('Usuario Incorrecto')
+      }else if(data['Usuario'][0].Password != this.Password){
+        alert('Password incorrecto');
+      } else
+      {
+        this.router.navigateByUrl('dashboard');
+        this.storage.setStorage('User', this.Username);
+        this.storage.setStorage('Img', this.url+'imagen/' + data['Usuario'][0].Img);  
+      }    
     });
-    this.storage.setStorage('User', this.Username);
-    this.storage.setStorage('Img', this.url+'imagen/'+this.Username + '.jpg');
-    this.router.navigateByUrl('dashboard');
   }
 
   ForgotPasword(){
