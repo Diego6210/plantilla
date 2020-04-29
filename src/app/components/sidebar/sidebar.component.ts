@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { LocalStorageService } from 'src/app/service/local-storage.service';
 
 declare interface RouteInfo {
   path: string;
@@ -59,9 +60,12 @@ export const ROUTES: RouteInfo[] = [
 })
 export class SidebarComponent implements OnInit {
   menuItems: any[];
-  permiso = 1;
+  
+  TipoUsuario = this.storage.getStorage('TipoUsuario');
 
-  constructor() {}
+  constructor(
+    private storage: LocalStorageService
+  ) {}
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);

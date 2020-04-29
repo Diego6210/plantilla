@@ -85,7 +85,7 @@
 
   <ng-template #content let-c="close" let-d="dismiss">
     <div class=" modal-header">
-      <h4 style="color: #ffffff;" class="modal-title" id="modal-basic-title">Hi there!</h4>
+      <h4 style="color: #ffffff;" class="modal-title" id="modal-basic-title">Nuevo Chat</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span style="color: red;" aria-hidden="true">&times;</span>
       </button>
@@ -97,14 +97,16 @@
             <div class="col-12 px-0">
                 <div class="bg-white">
 
-                    <a *ngFor="let chats of Chats" class="dark list-group-item list-group-item-action list-group-item-light rounded-0">
+                    <a *ngFor="let usuarios of Usuarios"  class="dark list-group-item list-group-item-action list-group-item-light rounded-0">
                         <div class="media">
-                            <img src="{{chats.img}}" alt="user" width="50" class="rounded-circle">
+                            <img src="{{usuarios.img}}" alt="user" width="50" class="rounded-circle">
                             <div class="media-body ml-4">
                                 <div class="d-flex align-items-center justify-content-between mb-1">
-                                    <h6 class="mb-0">{{chats.usuario}}</h6><small class="small font-weight-bold">{{chats.fecha}}</small>
+                                    <h6 class="mb-0">{{usuarios.usuario}}</h6>
                                 </div>
                             </div>
+                            <i (click)="CrearChat(usuarios.idUsuario)" color="success" style="color: dodgerblue;" class="fas fa-comments fa-2x"></i>
+
                         </div>
                     </a>
 
@@ -114,11 +116,14 @@
 
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Cancelar</button>
     </div>
   </ng-template>
   
   <style>
+    a{
+        cursor:pointer
+    }
 
     .modal-body,.modal-header,  .modal-footer{
         background-color : rgb(57, 59, 88)  !important;  

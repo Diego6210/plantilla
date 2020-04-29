@@ -1,4 +1,9 @@
 <style>
+
+  select,input{
+      background-color : rgb(53, 54, 77)  !important;  
+  }
+
   .body-table{
     background-color: #141516;
   }
@@ -48,11 +53,11 @@
         <div class=" card-header"><h5 class=" title">Usuarios</h5></div>
         <div class=" card-body">
 
-          <button class="btn btn-primary mb-2 mr-2" (click)="openLg(content)"><i class="fa fa-user-plus"></i> Agregar Usuario</button>
+          <button class="btn btn-fill btn-info mb-2 mr-2" (click)="openLg(content)"><i class="fa fa-user-plus"></i> Agregar Usuario</button>
 
           <br><br>
-          
-          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="body-table">
+         <!--  datatable  -->
+          <table [dtOptions]="dtOptions"  style="width: 100%"  class="table table-responsive row-border body-table">
               <thead>
                 <tr>
                   <th>#</th>
@@ -89,12 +94,38 @@
 
 
 <style>
+  tr .dataTables_empty
+  {
+    background-color : rgb(57, 59, 88)  !important;  
+
+  }
+  .no-data-available {
+  text-align: center;
+  background-color : rgb(57, 59, 88)  !important;  
+  color: #141516;
+
+}
 .modal-body,.modal-header,  .modal-footer{
   background-color : rgb(57, 59, 88)  !important;  
 }
 label, h4{
   color: #ffffff;
 }
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    width: 5px;
+    background: rgb(57, 59, 80);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    width: 1em;
+    background-color: rgb(131, 127, 127);
+    outline: 1px solid rgb(89, 94, 99);
+    border-radius: 1rem;
+  }
 </style>
 
 <ng-template #content let-modal class=" form-control-modal">
@@ -105,32 +136,34 @@ label, h4{
     </button>
   </div>
   <div class="modal-body">
-    <form>
       <div class=" row">
         <div class=" col-md-3 pr-md-1">
           <div class=" form-group">
-            <label> Username </label>
-            <input
+            <label> Usuario: </label>
+            <input             
+              [(ngModel)]="Usuario"
               class=" form-control"
-              placeholder="Username"
+              placeholder="Usuario"
               type="text"
             />
           </div>
         </div>
         <div class=" col-md-4 px-md-1">
           <div class=" form-group">
-            <label for="exampleInputEmail1"> Email address </label>
+            <label for="exampleInputEmail1"> Email: </label>
             <input
+              [(ngModel)]="Email"
               class=" form-control"
-              placeholder="mike@email.com"
+              placeholder="@email.com"
               type="email"
             />
           </div>
         </div>
         <div class=" col-md-5 pl-md-1">
           <div class=" form-group">
-            <label> Password</label>
+            <label> Password:</label>
             <input
+              [(ngModel)]="Password"
               class=" form-control"
               placeholder="Password"
               type="text"
@@ -139,24 +172,35 @@ label, h4{
         </div>
       </div>
       <div class=" row">
-        <div class=" col-md-6 pr-md-1">
+        <div class=" col-md-4 pr-md-1">
           <div class=" form-group">
-            <label> First Name </label>
+            <label> Nombre; </label>
             <input
+              [(ngModel)]="Nombre"
               class=" form-control"
-              placeholder="Company"
+              placeholder="Nombre"
               type="text"
             />
           </div>
         </div>
-        <div class=" col-md-6 pl-md-1">
+        <div class=" col-md-4 pl-md-1">
           <div class=" form-group">
-            <label> Last Name </label>
+            <label> Apellidos: </label>
             <input
+              [(ngModel)]="Apellidos"
               class=" form-control"
-              placeholder="Last Name"
+              placeholder="Apellidos"
               type="text"
             />
+          </div>
+        </div>
+        <div class=" col-md-4 pl-md-1">
+          <div>
+            <label style="color: white;">Tipo de usuario:</label>
+            <select [(ngModel)]="id" (change)="capturar()"  class="form-control" id="exampleFormControlSelect1">
+              <option value="0">Selecione un tipo</option>
+              <option *ngFor="let tipoUsuario of TipoUsuario" value="{{tipoUsuario.Id}}">{{tipoUsuario.Descripcion}}</option>
+            </select>
           </div>
         </div>
       </div>
@@ -204,12 +248,11 @@ label, h4{
           </div>
         </div>
       </div>
-    </form>
     
   </div>
   <div class="modal-footer">
     <br><br>
-    <button type="button" class="btn btn-danger" (click)="Agregar('top', 'center')">Agregar</button>
+    <button type="button" class="btn btn-fill btn-info" (click)="Agregar('top', 'center')">Agregar</button>
   </div>
 </ng-template>
 

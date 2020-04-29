@@ -26,15 +26,16 @@
                 </div>
                 <div class=" col-6">
                     <label style="color: white;">Tarea para el usuario:</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                        <option value="{{id}}">{{usuario}}</option>
+                    <select [(ngModel)]="id" (change)="capturar()"  class="form-control" id="exampleFormControlSelect1">
+                      <option value="0">Selecione un usuario</option>
+                      <option *ngFor="let usuario of Usuario" value="{{usuario.Id}}">{{usuario.Usuario}}</option>
                     </select>
                 </div>
             </div>
             <br><br>
             <div class=" row">
                 <div class=" col-6">
-                    <button type="button" class="btn" (click)="SaveTask()">Guardar</button>
+                    <button type="button" class="btn btn-fill btn-info " (click)="SaveTask()">Asignar</button>
                 </div>
             </div>
           </div>

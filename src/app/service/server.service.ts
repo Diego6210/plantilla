@@ -28,12 +28,22 @@ export class ServerService {
     return this.http.get(`${this.URL}Usuario/SelectUsuario`);
   }
 
-  setUsuario(user){
+  getUsuariosAll(){
+
+    return this.http.get(`${this.URL}Usuario/SelectUsuariosAll`);
+  }
+
+  setUsuarios(Usuario ,Email, Password, Nombre, Apellido, TipoUsuario){
     
     const formData = new FormData();
-    formData.append('user', user);
+    formData.append('Usuario', Usuario);
+    formData.append('Email', Email);
+    formData.append('Password', Password);
+    formData.append('Nombre', Nombre);
+    formData.append('Apellido', Apellido);
+    formData.append('TipoUsuario', TipoUsuario);
 
-    return this.http.post(`${this.URL}Usuario/SelectUsuarioByUser`, formData);
+    return this.http.post(`${this.URL}Usuario/setUsuario`, formData);
 
   }
 
@@ -46,6 +56,83 @@ export class ServerService {
     return this.http.post(`${this.URL}Usuario/setImagen`, formData);
 
   }
+
+
+  setTarea(Titulo,Tarea,Fecha,Completado,IdUsuario){
+    
+    const formData = new FormData();
+    formData.append('Titulo', Titulo);
+    formData.append('Tarea', Tarea);
+    formData.append('Fecha', Fecha);
+    formData.append('Completado', Completado);
+    formData.append('IdUsuario', IdUsuario);
+
+    return this.http.post(`${this.URL}Tasks/setTarea`, formData);
+
+  }
+
+  setTareaUpdate(Titulo,Tarea,Fecha,IdTarea,IdUsuario){
+    
+    const formData = new FormData();
+    formData.append('Titulo', Titulo);
+    formData.append('Tarea', Tarea);
+    formData.append('Fecha', Fecha);
+    formData.append('IdTarea', IdTarea);
+    formData.append('IdUsuario', IdUsuario);
+
+    return this.http.post(`${this.URL}Tasks/setTareaUpdate`, formData);
+
+  }
+
+  getTareasbyuser(user){
+
+    const formData = new FormData();
+    formData.append('user', user);
+
+    return this.http.post(`${this.URL}Tasks/SelectTareasByUser`, formData);
+  }
+
+  setTareaChange(Completado,IdTarea,IdUsuario){
+    
+    const formData = new FormData();
+    formData.append('Completado', Completado);
+    formData.append('IdTarea', IdTarea);
+    formData.append('IdUsuario', IdUsuario);
+
+    return this.http.post(`${this.URL}Tasks/setTareaChange`, formData);
+
+  }
+
+  getTareasbyID(IdTarea){
+
+    const formData = new FormData();
+    formData.append('IdTarea', IdTarea);
+
+    return this.http.post(`${this.URL}Tasks/SelectTareasByID`, formData);
+  }
+
+  setTareaDelete(task,user){
+
+    const formData = new FormData();
+    formData.append('user', user);    
+    formData.append('IdTarea', task);
+
+    return this.http.post(`${this.URL}Tasks/setDeleteTarea`, formData);
+  }
+
+  setUsuarioDelete(IdUsuario){
+
+    const formData = new FormData();
+    formData.append('IdUsuario', IdUsuario);
+
+    return this.http.post(`${this.URL}Usuario/setDeleteUsuario`, formData);
+  }
+
+  getTipoUsuario(){
+
+    return this.http.get(`${this.URL}Usuario/getTipoUsuario`);
+  }
+
 
 
 }

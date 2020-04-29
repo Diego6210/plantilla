@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { ServerService } from 'src/app/service/server.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: "app-user",
@@ -17,13 +17,51 @@ export class UserComponent implements OnInit {
 
   imgdefault = this.storage.getStorage('Img')
   cheange = false;
+  
+
   Username:string;
-  routerServer = 'http://localhost:3000/upload/'+ this.Username;
+  Apellidos:string;
+  Nombre:string;
+  Email:string;
+  Password:string;
+
   IMG:string;
   formData = new FormData();
+  TipoUsuario=[];
+  id = 0;
+  idTipoUsuario;
 
   ngOnInit() {
     this.Username = this.storage.getStorage('User');
+    this.getTipoUsuarios();
+    this.getUsuario();
+  }
+
+  getUsuario(){
+    this.server.getUsuariobyUsuario(this.Username).subscribe((data) => {
+      this.Apellidos = data['Usuario'][0].Apellido;
+      this.Nombre = data['Usuario'][0].Nombre;
+      this.Email = data['Usuario'][0].Email;
+    });
+  }
+
+  getTipoUsuarios(){
+    this.server.getTipoUsuario().subscribe((data) => {
+      this.TipoUsuario = [];
+      for(let i = 0; i < data['Usuario'].length; i++){
+
+        this.TipoUsuario.push({
+          
+          Descripcion:data['Usuario'][i].Descripcion,
+          Id:data['Usuario'][i].IdTipoUsuario
+
+        });
+      }
+    });
+  }
+
+  GuardarCambios(){
+    alert(this.Password +'-'+this.Username +'-'+this.idTipoUsuario);
   }
 
   onChange($event,Archivo: FileList){
@@ -50,10 +88,16 @@ export class UserComponent implements OnInit {
 
     }
   }
+
+  capturar() {
+    this.idTipoUsuario = this.id;
+  }
   
   onSubmit() {
     this.server.uploadFile(this.formData,this.Username).subscribe((data) =>{ console.log(data)});
     
     this.server.setUsuarioIMG(this.IMG,this.Username).subscribe((data) => {console.log(data)});
+    this.cheange = false;
+
   }  
 }

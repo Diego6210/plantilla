@@ -17,6 +17,20 @@ app.get('/Usuario/SelectUsuario', function(req, res) {
     });
 });
 
+app.get('/Usuario/SelectUsuariosAll', function(req, res) {
+
+    connection.query('SELECT Usuario, IdUsuario, Img FROM Usuario',function(err,data)     {
+
+        if(err) {            
+            res.send('no se seleciono nada');
+        } else {
+            res.json({
+                Usuario:data
+            });
+        }
+    });
+});
+
 app.post('/Usuario/SelectUsuarioByUser', function(req, res) {
     
     let body = req.body;
@@ -62,16 +76,44 @@ app.post('/Usuario/setUsuario', function(req, res) {
     });
 });
 
+app.post('/Usuario/setUsuarioModificar', function(req, res) {
+    
+    let body = req.body;
+    
+    connection.query(`UPDATE Usuario SET Usuario = '${body.Usuario}',Email = '${body.Email}',Password = '${body.Password}',Nombre = '${body.Nombre}',Apellido = '${body.Apellido}',IdTipoUsuario = ${body.TipoUsuario} WHERE  Usuario = '${body.user}'`,function(err,data)     {
+
+        if(err) {            
+            res.send('no se inserto');
+        } else {
+            res.send('Se inserto');
+        }
+    });
+});
+
 app.post('/Usuario/setDeleteUsuario', function(req, res) {
     
     let body = req.body;
     
-    connection.query(`SELECT * FROM Usuario WHERE Usuario = '${body.user}'`,function(err,data)     {
+    connection.query(`DELETE FROM Usuario WHERE IdUsuario = ${body.IdUsuario}`,function(err,data)     {
 
         if(err) {            
-            res.send('no se obtuvo resultado');
+            res.send('no se elimino');
         } else {
             res.send('se elimino');
+        }
+    });
+});
+
+app.get('/Usuario/getTipoUsuario', function(req, res) {
+
+    connection.query('SELECT * FROM TipoUsuario',function(err,data)     {
+
+        if(err) {            
+            res.send('no se seleciono nada');
+        } else {
+            res.json({
+                Usuario:data
+            });
         }
     });
 });

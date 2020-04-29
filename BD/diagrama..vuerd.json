@@ -575,7 +575,7 @@
             "name": "Img",
             "comment": "",
             "dataType": "VARCHAR(50)",
-            "default": "",
+            "default": "'default-avatar.png'",
             "id": "0044c619-511f-4075-8dd1-9f0e29ad5fcf",
             "option": {
               "autoIncrement": false,
@@ -591,7 +591,7 @@
               "widthName": 60,
               "widthComment": 60,
               "widthDataType": 88,
-              "widthDefault": 60
+              "widthDefault": 111
             }
           },
           {
@@ -648,7 +648,7 @@
           "columnIds": [
             "9c603b49-dd03-4d9b-a680-5c3c5b0dc495"
           ],
-          "x": 368,
+          "x": 419,
           "y": 394.1666666666667,
           "direction": "right"
         },
@@ -703,7 +703,7 @@
           "columnIds": [
             "e54ce6a8-c21a-4af5-921b-419f8f21cf27"
           ],
-          "x": 203,
+          "x": 228.5,
           "y": 270.6666666666667,
           "direction": "top"
         }

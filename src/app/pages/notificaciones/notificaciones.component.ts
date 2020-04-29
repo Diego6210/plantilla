@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerSocketService } from 'src/app/service/server-socket.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-notificaciones',
@@ -30,12 +31,17 @@ export class NotificacionesComponent implements OnInit {
       this.alert = "";
       this.notificacion = "";
 
-      alert('Mensajes enviado a todos los usuarios conectados');
+      Swal.fire({
+        icon: 'success',
+        text:'Mensajes enviado a todos los usuarios conectados'
+      });
 
     }else{
-      alert("complete los campos");
+      Swal.fire({
+        icon: 'error',
+        text:'Complete los campos',
+      });
     }
-
   }
 
 }

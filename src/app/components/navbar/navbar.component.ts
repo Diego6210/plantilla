@@ -52,6 +52,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
        navbar.classList.add('navbar-transparent');
      }
    };
+
   ngOnInit() {
     window.addEventListener("resize", this.updateColor);
     this.listTitles = ROUTES.filter(listTitle => listTitle);

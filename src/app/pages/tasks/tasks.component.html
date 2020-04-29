@@ -21,7 +21,7 @@
                   <td>
                     <div class=" form-check">
                       <label class=" form-check-label">
-                        <input (change)="ChangeTalks(task.IdTarea,task.Completado)" checked="{{task.Completado}}" values="{{task.Completado}}" class=" form-check-input" type="checkbox"/>
+                        <input (change)="ChangeTalks(task.IdTarea,$event)" [checked]="task.Completado"  class=" form-check-input" type="checkbox"/>
                         <span class=" form-check-sign"><span class=" check"> </span></span>
                       </label>
                     </div>
@@ -35,8 +35,11 @@
                   </td>
                   
                   <td class=" td-actions text-right">
-                    <button (click)="ChangeTalks(task.IdTarea)" class=" btn btn-link" type="button" placement="left" ngbTooltip="Edit Task" container="body" >
+                    <button (click)="EditsTalks(task.IdTarea,content)" class=" btn btn-link" type="button" placement="left" ngbTooltip="Editar Tarea" container="body" >
                       <i class=" tim-icons icon-pencil"> </i>
+                    </button>
+                    <button (click)="DeleteTalks(task.IdTarea)" class=" btn btn-link" type="button" placement="left" ngbTooltip="Eliminar Tarea" container="body" >
+                      <i class=" tim-icons icon-trash-simple"> </i>
                     </button>
                   </td>
 
@@ -57,7 +60,7 @@
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class=" modal-header">
-    <h4 style="color: #ffffff;" class="modal-title" id="modal-basic-title">Nueva Tarea</h4>
+    <h4 style="color: #ffffff;" class="modal-title" id="modal-basic-title">{{TituloModal}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span style="color: red;" aria-hidden="true">&times;</span>
     </button>
@@ -83,7 +86,10 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="SaveTask()">Save</button>
+    <button type="button" *ngIf="TipoModal"  class="btn btn-fill btn-info " (click)="SaveTask()">Guardar</button>
+  
+    
+    <button type="button" *ngIf="!TipoModal" class="btn btn-fill btn-info " (click)="UpdateTask()">Guardar Cambios</button>
   </div>
 </ng-template>
 
