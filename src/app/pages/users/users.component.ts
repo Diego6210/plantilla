@@ -3,8 +3,9 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { ServerService } from 'src/app/service/server.service';
-import { DataTableDirective } from 'angular-datatables';
 import Swal from 'sweetalert2'
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-users',
@@ -14,6 +15,8 @@ import Swal from 'sweetalert2'
 export class UsersComponent implements OnInit {
 
   private url: string = environment.Server+'imagen/';
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  dataSource = null;
 
   Usuarios = [];
   TipoUsuario=[];
@@ -29,22 +32,8 @@ export class UsersComponent implements OnInit {
 
   TituloModal:string = 'Agregar Usuario';
   TipoModal:boolean = true;
+  columnas: string[] = ['img', 'Usuario', 'Email','nombre', 'apellido','acciones'];
 
-  /*  
-  {
-      Usuario:'diego',
-      img:'https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg',
-      nombre:'diego',
-      apellido:'garcia',
-      id:1      
-    }
-    */
-
-  dtOptions: any;
-  
-  
-  @ViewChild('dataTable', {static: true}) table;
-  
   constructor(
     private modalService: NgbModal,
     private toastr: ToastrService,
@@ -60,17 +49,27 @@ export class UsersComponent implements OnInit {
   }
 
   Agregar(from, align){
-    let status = false;
-    Swal.fire({
-      icon: 'success',
-      text:'Usuario agregado correctamente'
-    });
+    this.server.setUsuarios(this.Usuario ,this.Email, this.Password, this.Nombre, this.Apellidos, this.idTipoUsuario).subscribe((data) => {
+      if(data['ok']){
+        Swal.fire({
+          icon: 'success',
+          text:'Usuario agregado correctamente'
+        });
+        this.Usuario = '';
+        this.Email= '';
+        this.Password= '';
+        this.Nombre= '';
+        this.Apellidos= '';
 
-    Swal.fire({
-      icon: 'error',
-      text:'El usuario no se agrego correctamente',
+        this.getDataFromSource();
+        this.modalService.dismissAll();
+      }else{
+        Swal.fire({
+          icon: 'error',
+          text:'El usuario no se agrego correctamente',
+        });
+      }
     });
-    this.modalService.dismissAll();
   }
 
 
@@ -153,56 +152,15 @@ export class UsersComponent implements OnInit {
         });
         
       }
+
+        this.dataSource = new MatTableDataSource(this.Usuarios);
+        this.dataSource.paginator = this.paginator;
     });
-
-   /*this.dtOptions = {
-      language: {
-        "lengthMenu": "Mostrando _MENU_ registros por pag.",
-        "zeroRecords": "Sin Datos - disculpa",
-        "info": "Motrando pag. _PAGE_ de _PAGES_",
-        "infoEmpty": "Sin registros disponibles",
-        "infoFiltered": "(filtrado de _MAX_ total)"
-    }
-    };
-
-    this.dtOptions = {
-      destroy:true,
-      serverSide: true,
-      processing: true,
-      ajax:this.server.getUsuarios().subscribe(resp => {
-        this
-      }) ,
-      language: {
-          "lengthMenu": "Mostrando _MENU_ registros por pag.",
-          "zeroRecords": "Sin Datos - disculpa",
-          "info": "Motrando pag. _PAGE_ de _PAGES_",
-          "infoEmpty": "Sin registros disponibles",
-          "infoFiltered": "(filtrado de _MAX_ total)"
-      },
-  
-      "columnDefs":[
-        {
-            "targets":0, "data":"img", "render": function(data,type,row,meta)
-            {
-              console.log(data);
-              return '<img src="'+row['img']+'" width="50px" alt="user"class="rounded-circle">';
-
-            }
-          },
-        {
-            "targets":4, "data":"id", "render": function(data,type,row,meta)
-            {
-              return '<button (click)="Edits(user.id)" class=" btn btn-success btn-link btn-sm btn-icon" tooltip="Refresh" type="button" aria-describedby="tooltip-142"><i class=" tim-icons icon-pencil"></i></button>'+
-              '<button (click)="Delet(user.id)" class=" btn btn-danger btn-link btn-sm" tooltip="Delete" type="button" aria-describedby="tooltip-143"><i class=" tim-icons icon-simple-remove"></i></button>';
-            }
-        }
-      ],
-      columns: [
-              { title: 'Usuario', "data": "Usuario" },
-              { title: 'First name', "data": "nombre" },
-              { title: 'Last name', "data": "apellido" }
-          ]
-    };*/
   }
+
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtro.trim().toLowerCase();
+  } 
  
 }

@@ -38,10 +38,7 @@ export class MensagesComponent implements OnInit {
 
 
   SendMenssege(){
-    //alert(this.IdChat) 
-
     this.server.setChatMensaje(this.IdUsername,this.IdChat,this.Mensaje).subscribe((data) =>{ 
-      console.log(data)
       this.Mensajes.push({
         usuario:this.IdUsername,
         message:this.Mensaje
@@ -112,7 +109,6 @@ export class MensagesComponent implements OnInit {
 
   getChats(){
     this.server.getChats(this.IdUsername).subscribe((data) => {
-      console.log(data)
       this.Chats = [];
       for(let i = 0; i < data['Chats'].length; i++){
         

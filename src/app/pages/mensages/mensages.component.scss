@@ -45,3 +45,12 @@
     background-color : rgb(43, 45, 65)   !important;  
     border:  rgb(57, 59, 80)   !important ;
   }
+
+  a{
+    cursor:pointer
+  }
+
+  .modal-body,.modal-header,  .modal-footer{
+      background-color : rgb(57, 59, 88)  !important;  
+      border: none;
+  }

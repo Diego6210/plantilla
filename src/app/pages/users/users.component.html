@@ -1,51 +1,4 @@
-<style>
 
-  select,input{
-      background-color : rgb(53, 54, 77)  !important;  
-  }
-
-  .body-table{
-    background-color: #141516;
-  }
-
-  .row-border{
-    background-color: #242525;
-  }
-
-  td{
-    color: #ffffff;
-  }
-
-  input{
-      background-color : rgb(53, 54, 77)  !important;  
-  }
-
-  tbody tr{
-    background-color: #212122;
-  }
-
-
-  tbody tr:hover{
-    background-color: #333335;
-  }
-
-  tbody tr td:hover{
-    background-color: #333335;
-  }
-
-  .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
-    color: #ffffff;
-  }
-
- .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
-    cursor: default;
-    color: #ffffff !important;
-    
-    border: 1px solid transparent;
-    background: transparent;
-    box-shadow: none;
-}
-</style>
 <div class=" content">
   <div class=" row">
     <div class=" col-md-12">
@@ -55,35 +8,54 @@
 
           <button class="btn btn-fill btn-info mb-2 mr-2" (click)="openLg(content)"><i class="fa fa-user-plus"></i> Agregar Usuario</button>
 
-          <br><br>
-         <!--  datatable  -->
-          <table [dtOptions]="dtOptions"  style="width: 100%"  class="table table-responsive row-border body-table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Usuario</th>
-                  <th>First name</th>
-                  <th>Last name</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
+          <br><br>            
+            <!-- Search form -->
+            <div class="md-form mt-0">
+              <input  (keyup)="filtrar($event)" class="form-control" type="text" placeholder="Buscar" aria-label="Search">
+            </div>
 
-                <tr  *ngFor="let user of Usuarios">
-                  <td>
-                    <img src="{{user.img}}" width="50px" alt="user"class="rounded-circle">
+            <div class="mat-elevation-z8 table-responsive">
+              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table  " #tabla1>
+            
+                <ng-container matColumnDef="img">
+                  <th mat-header-cell *matHeaderCellDef> # </th>
+                  <td mat-cell *matCellDef="let usuarios"><img src="{{usuarios.img}}" height="auto"  alt="user"class="rounded-circle"></td>
+                </ng-container>
+            
+                <ng-container matColumnDef="Usuario">
+                  <th mat-header-cell *matHeaderCellDef> Usuario </th>
+                  <td mat-cell *matCellDef="let usuarios"> {{usuarios.Usuario}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Email">
+                  <th mat-header-cell *matHeaderCellDef> Email </th>
+                  <td mat-cell *matCellDef="let usuarios"> {{usuarios.Email}} </td>
+                </ng-container>
+            
+                <ng-container matColumnDef="nombre">
+                  <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                  <td mat-cell *matCellDef="let usuarios"> {{usuarios.nombre}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="apellido">
+                  <th mat-header-cell *matHeaderCellDef> Apellido </th>
+                  <td mat-cell *matCellDef="let usuarios"> {{usuarios.apellido}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="acciones">
+                  <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                  <td mat-cell *matCellDef="let usuarios">
+                    <button (click)="Edits(usuarios.id,content)" class=" btn btn-success btn-link btn-sm btn-icon" tooltip="Refresh" type="button" aria-describedby="tooltip-142"><i class=" tim-icons icon-pencil"></i></button>
+                    <button (click)="Delet(usuarios.id)" class=" btn btn-danger btn-link btn-sm" tooltip="Delete" type="button" aria-describedby="tooltip-143"><i class=" tim-icons icon-simple-remove"></i></button>
                   </td>
-                  <td>{{user.Usuario}}</td>
-                  <td>{{user.nombre}}</td>
-                  <td>{{user.apellido}}</td>
-                  <td class=" text-center">
-                    <button (click)="Edits(user.id,content)" class=" btn btn-success btn-link btn-sm btn-icon" tooltip="Refresh" type="button" aria-describedby="tooltip-142"><i class=" tim-icons icon-pencil"></i></button>
-                    <button (click)="Delet(user.id)" class=" btn btn-danger btn-link btn-sm" tooltip="Delete" type="button" aria-describedby="tooltip-143"><i class=" tim-icons icon-simple-remove"></i></button>
-                  </td>                
-                </tr>
-                
-              </tbody>
-            </table>
+                </ng-container>
+            
+                <tr style="width: 100%;" mat-header-row *matHeaderRowDef="columnas"></tr>
+                <tr style="width: 100%;" mat-row *matRowDef="let row; columns: columnas;"></tr>
+              </table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+            </div>
+
 
         </div>
       </div>
@@ -92,41 +64,6 @@
   </div>
 </div>
 
-
-<style>
-  tr .dataTables_empty
-  {
-    background-color : rgb(57, 59, 88)  !important;  
-
-  }
-  .no-data-available {
-  text-align: center;
-  background-color : rgb(57, 59, 88)  !important;  
-  color: #141516;
-
-}
-.modal-body,.modal-header,  .modal-footer{
-  background-color : rgb(57, 59, 88)  !important;  
-}
-label, h4{
-  color: #ffffff;
-}
-::-webkit-scrollbar {
-    width: 5px;
-  }
-  
-  ::-webkit-scrollbar-track {
-    width: 5px;
-    background: rgb(57, 59, 80);
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    width: 1em;
-    background-color: rgb(131, 127, 127);
-    outline: 1px solid rgb(89, 94, 99);
-    border-radius: 1rem;
-  }
-</style>
 
 <ng-template #content let-modal class=" form-control-modal">
   <div class="modal-header">

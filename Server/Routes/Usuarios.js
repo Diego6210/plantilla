@@ -84,10 +84,18 @@ app.post('/Usuario/setUsuario', function(req, res) {
     
     connection.query(`INSERT INTO Usuario(Usuario,Email,Password,Nombre,Apellido,IdTipoUsuario) VALUES('${body.Usuario}','${body.Email}','${body.Password}','${body.Nombre}','${body.Apellido}',${body.TipoUsuario})`,function(err,data)     {
 
-        if(err) {            
-            res.send('no se inserto');
+        if(err) {  
+            res.send({
+                mensaje: 'No se inserto',
+                icon: 'error',
+                ok: false
+            })           
         } else {
-            res.send('Se inserto');
+            res.send({
+                mensaje: 'Se inserto',
+                icon: 'success',
+                ok: true
+            })  
         }
     });
 });
