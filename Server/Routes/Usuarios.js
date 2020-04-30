@@ -47,6 +47,22 @@ app.post('/Usuario/SelectUsuarioByUser', function(req, res) {
     });
 });
 
+app.post('/Usuario/SelectUsuarioByIdUser', function(req, res) {
+    
+    let body = req.body;
+    
+    connection.query(`SELECT * FROM Usuario WHERE IdUsuario = ${body.iduser}`,function(err,data)     {
+
+        if(err) {            
+            res.send('no se obtuvo resultado');
+        } else {
+            res.json({
+                Usuario:data
+            });
+        }
+    });
+});
+
 app.post('/Usuario/setImagen', function(req, res) {
     
     let body = req.body;
@@ -80,7 +96,7 @@ app.post('/Usuario/setUsuarioModificar', function(req, res) {
     
     let body = req.body;
     
-    connection.query(`UPDATE Usuario SET Usuario = '${body.Usuario}',Email = '${body.Email}',Password = '${body.Password}',Nombre = '${body.Nombre}',Apellido = '${body.Apellido}',IdTipoUsuario = ${body.TipoUsuario} WHERE  Usuario = '${body.user}'`,function(err,data)     {
+    connection.query(`UPDATE Usuario SET Email = '${body.Email}',Password = '${body.Password}',Nombre = '${body.Nombre}',Apellido = '${body.Apellido}',IdTipoUsuario = ${body.TipoUsuario} WHERE  IdUsuario = ${body.iduser}`,function(err,data)     {
 
         if(err) {            
             res.send('no se inserto');

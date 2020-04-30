@@ -17,60 +17,59 @@ export class MensagesComponent implements OnInit {
     private server:ServerService
   ) {
     this.Username = this.storage.getStorage('User');
+    this.IdUsername = this.storage.getStorage('IdUsuario');
   }
 
   private url: string = environment.Server;
-
   Username:string;
+  IdUsername:string
   UsernameSend:string = null;
   UserimgSend:string;
-  UserSend = [
-    {
-      user:'Jasen',
-      img:'https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg'
-    }
-  ];
-
-  Mensajes = [
-    {
-      usuario:'nose',
-      message:'mensaje de nose',
-      fecha:'12 dic'
-    },{
-      usuario:'jose',
-      message:'mensaje de jose',
-      fecha:'12 dic'
-    }
-  ];
-
+  Mensajes = [];
   Usuarios =[];
-
-  Chats = [
-    {
-      idUsuario:1,
-      usuario:'nose',
-      img:'https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg',
-      fecha:'12 dic'
-    },{
-      idUsuario:2,
-      usuario:'jose',
-      img:'https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg',
-      fecha:'15 dic'
-    }
-  ];
+  Chats = [];
+  Mensaje:string;
+  IdChat:number;
 
   ngOnInit(): void {
+    this.getChats();
     this.getUsuarios();
   }
 
 
   SendMenssege(){
-    alert('enviar mensaje');
+    //alert(this.IdChat) 
+
+    this.server.setChatMensaje(this.IdUsername,this.IdChat,this.Mensaje).subscribe((data) =>{ 
+      console.log(data)
+      this.Mensajes.push({
+        usuario:this.IdUsername,
+        message:this.Mensaje
+      });
+  
+      this.Mensaje = '';
+    });
   }
 
-  selectUser(Userselect,UserselectImg){
+  selectUser(Userselect,UserselectImg,IdChat){
     this.UsernameSend = Userselect;
     this.UserimgSend= UserselectImg;
+    this.IdChat = IdChat;
+
+    this.server.getChatsMensajes(IdChat).subscribe((data) => {
+      this.Mensajes = []
+      console.log(data);
+      for(let i = 0; i < data['Chats'].length; i++){
+
+        this.Mensajes.push({
+          usuario:data['Chats'][i].IdUsuario,
+          message:data['Chats'][i].Mensaje,
+          fecha:data['Chats'][i].Hora
+
+        });
+      }
+    });
+
   }
   
   openModal(content){
@@ -78,8 +77,20 @@ export class MensagesComponent implements OnInit {
   }
 
   CrearChat(IdUsuario){
+    this.getChats();
     this.modalService.dismissAll();
-    alert(IdUsuario);
+    this.server.setChat(IdUsuario,this.IdUsername).subscribe((data) => {
+      if(data['ok']){
+        alert(data['mensaje']);
+      }else if(data['Chats'].IdChats != 0)
+        console.log(data['Chats']);
+      else if(!data['ok']){
+        alert(data['mensaje']);
+      }
+        //alert(data['mensaje'])
+
+        //console.log(data['Chats']);
+    });
 
   }
 
@@ -94,6 +105,39 @@ export class MensagesComponent implements OnInit {
           img:this.url+'imagen/' + data['Usuario'][i].Img,
           idUsuario:data['Usuario'][i].IdUsuario
 
+        });
+      }
+    });
+  }
+
+  getChats(){
+    this.server.getChats(this.IdUsername).subscribe((data) => {
+      console.log(data)
+      this.Chats = [];
+      for(let i = 0; i < data['Chats'].length; i++){
+        
+        if(data['Chats'][i].IdUsuario1 == this.IdUsername){
+          var idUsuario = data['Chats'][i].IdUsuario2;
+          var usuario = data['Chats'][i].Usuario2;
+          var img = data['Chats'][i].Img2;
+          var nombre = data['Chats'][i].Nombre2;
+          var apellido = data['Chats'][i].Apellido2;
+        }else{
+          var idUsuario = data['Chats'][i].IdUsuario1;
+          var usuario = data['Chats'][i].Usuario1;
+          var img = data['Chats'][i].Img1;
+          var nombre = data['Chats'][i].Nombre1;
+          var apellido = data['Chats'][i].Apellido1;
+        }
+
+        this.Chats.push({
+          
+          IdChats:data['Chats'][i].IdChats,
+          usuario:usuario,
+          img:this.url+'imagen/' + img,
+          idUsuario: idUsuario,
+          nombre:nombre,
+          apellido:apellido
         });
       }
     });

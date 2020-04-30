@@ -86,11 +86,19 @@ export class TasksComponent implements OnInit {
         this.Titulo  = '';
         this.Tarea = '';
         this.Fecha = '';
-      }else
-        alert('complete los campos')
+      }else{
+        Swal.fire({
+          icon: 'error',
+          text:'Complete los campos',
+        });
+      }
     }
-    else
-      alert('complete los campos')
+    else{
+      Swal.fire({
+        icon: 'error',
+        text:'Complete los campos',
+      });
+    }
   }
 
 
@@ -132,5 +140,9 @@ export class TasksComponent implements OnInit {
     this.modalService.dismissAll();
     this.server.setTarea(this.Titulo,this.Tarea,this.Fecha,1,this.idUsuario).subscribe((data) =>{ console.log(data)});
     this.getTasks();
+    
+    this.Titulo  = '';
+    this.Tarea = '';
+    this.Fecha = '';
   }
 }

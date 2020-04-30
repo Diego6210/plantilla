@@ -23,6 +23,14 @@ export class ServerService {
     return this.http.post(`${this.URL}Usuario/SelectUsuarioByUser`, formData);
   }
 
+  getUsuariobyIdUsuario(iduser){
+
+    const formData = new FormData();
+    formData.append('iduser', iduser);
+
+    return this.http.post(`${this.URL}Usuario/SelectUsuarioByIdUser`, formData);
+  }
+
   getUsuarios(){
 
     return this.http.get(`${this.URL}Usuario/SelectUsuario`);
@@ -131,6 +139,42 @@ export class ServerService {
   getTipoUsuario(){
 
     return this.http.get(`${this.URL}Usuario/getTipoUsuario`);
+  }
+
+  setChat(IdUsuario1,IdUsuario2){
+
+    const formData = new FormData();
+    formData.append('IdUsuario1', IdUsuario1);    
+    formData.append('IdUsuario2', IdUsuario2);
+
+    return this.http.post(`${this.URL}Chat/setChats`, formData);
+  }
+
+  getChats(IdUsuario){
+
+    const formData = new FormData();   
+    formData.append('IdUsuario', IdUsuario);
+
+    return this.http.post(`${this.URL}Chat/getChats`, formData);
+  }
+
+
+  getChatsMensajes(IdChats){
+
+    const formData = new FormData();   
+    formData.append('IdChats', IdChats);
+
+    return this.http.post(`${this.URL}Chat/getChatsMensajesByUser`, formData);
+  }
+
+  setChatMensaje(IdUsuario,IdChats,Mensaje){
+
+    const formData = new FormData();
+    formData.append('IdUsuario', IdUsuario);    
+    formData.append('IdChats', IdChats);   
+    formData.append('Mensaje', Mensaje);
+
+    return this.http.post(`${this.URL}Chat/setChatMensaje`, formData);
   }
 
 

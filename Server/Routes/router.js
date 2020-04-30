@@ -16,6 +16,7 @@ app.use(function(req, res, next) {
 app.use(require('./Upload'));
 app.use(require('./Usuarios'));
 app.use(require('./Tasks'));
+app.use(require('./Chats'));
 app.use(require('./Public'));
 
 

@@ -42,7 +42,8 @@
               </div>
             </div>
             <div class=" row">
-              <div class=" col-md-4 pr-md-1">
+              <div [ngClass]="{'col-md-4' : permisosUsuario == 1,
+                               'col-md-6' : permisosUsuario != 1}" class="pl-md-1">
                 <div class=" form-group">
                   <label> Nombre: </label>
                   <input
@@ -53,7 +54,8 @@
                   />
                 </div>
               </div>
-              <div class=" col-md-4 pl-md-1">
+              <div [ngClass]="{'col-md-4' : permisosUsuario == 1,
+                               'col-md-6' : permisosUsuario != 1}" class="pl-md-1">
                 <div class=" form-group">
                   <label> Apellidos: </label>
                   <input
@@ -64,7 +66,7 @@
                   />
                 </div>
               </div>
-              <div class=" col-md-4">
+              <div *ngIf="permisosUsuario == 1" class="col-md-4">
                 <div>
                   <label style="color: white;">Tipo de usuario:</label>
                   <select [(ngModel)]="id" (change)="capturar()"  class="form-control" id="exampleFormControlSelect1">

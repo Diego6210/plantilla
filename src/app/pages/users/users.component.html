@@ -77,7 +77,7 @@
                   <td>{{user.nombre}}</td>
                   <td>{{user.apellido}}</td>
                   <td class=" text-center">
-                    <button (click)="Edits(user.id)" class=" btn btn-success btn-link btn-sm btn-icon" tooltip="Refresh" type="button" aria-describedby="tooltip-142"><i class=" tim-icons icon-pencil"></i></button>
+                    <button (click)="Edits(user.id,content)" class=" btn btn-success btn-link btn-sm btn-icon" tooltip="Refresh" type="button" aria-describedby="tooltip-142"><i class=" tim-icons icon-pencil"></i></button>
                     <button (click)="Delet(user.id)" class=" btn btn-danger btn-link btn-sm" tooltip="Delete" type="button" aria-describedby="tooltip-143"><i class=" tim-icons icon-simple-remove"></i></button>
                   </td>                
                 </tr>
@@ -130,7 +130,7 @@ label, h4{
 
 <ng-template #content let-modal class=" form-control-modal">
   <div class="modal-header">
-    <h4 style="color: #ffffff;" class="modal-title">Agregar Usuario </h4>
+    <h4 style="color: #ffffff;" class="modal-title">{{TituloModal}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span style="color: red;" aria-hidden="true">&times;</span>
     </button>
@@ -252,7 +252,10 @@ label, h4{
   </div>
   <div class="modal-footer">
     <br><br>
-    <button type="button" class="btn btn-fill btn-info" (click)="Agregar('top', 'center')">Agregar</button>
+    <button type="button" *ngIf="TipoModal"  class="btn btn-fill btn-info " (click)="Agregar('top', 'center')">Agregar</button>
+  
+    
+    <button type="button" *ngIf="!TipoModal" class="btn btn-fill btn-info " (click)="UpdateTask()">Guardar Cambios</button>
   </div>
 </ng-template>
 

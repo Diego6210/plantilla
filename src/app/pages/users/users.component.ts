@@ -19,11 +19,16 @@ export class UsersComponent implements OnInit {
   TipoUsuario=[];
   id = 0;
   idTipoUsuario;
+
   Usuario:string;
   Apellidos:string;
   Nombre:string;
   Email:string;
   Password:string;
+
+
+  TituloModal:string = 'Agregar Usuario';
+  TipoModal:boolean = true;
 
   /*  
   {
@@ -48,6 +53,9 @@ export class UsersComponent implements OnInit {
   
 
   openLg(content) {
+    this.TituloModal = 'Agregar Usuario';
+    this.TipoModal = true;
+    
     this.modalService.open(content, { size: 'lg' });
   }
 
@@ -109,9 +117,16 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  Edits(idUser){
-    alert('edits ' + idUser)
-
+  Edits(idUser,content){
+    this.TituloModal = 'Editar Usuario';
+    this.TipoModal = false;
+    this.modalService.open(content, { size: 'lg' });
+    this.server.getUsuariobyIdUsuario(idUser).subscribe((data) => {
+      this.Usuario = data['Usuario'][0].Usuario;
+      this.Apellidos = data['Usuario'][0].Apellido;
+      this.Nombre = data['Usuario'][0].Nombre;
+      this.Email = data['Usuario'][0].Email;
+    })
   }
   
   ngOnInit(): void {
