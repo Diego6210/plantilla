@@ -96,6 +96,7 @@
     "@types/jquery": "^3.3.34",
     "@types/node": "13.9.0",
     "ack-angular-webcam": "^1.10.0",
+    "angular-cli-ghpages": "^0.6.2",
     "codelyzer": "5.2.1",
     "jasmine-core": "3.5.0",
     "jasmine-spec-reporter": "4.2.1",

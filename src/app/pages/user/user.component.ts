@@ -18,7 +18,7 @@ export class UserComponent implements OnInit {
   imgdefault = this.storage.getStorage('Img');
   cheange = false;
   
-  permisosUsuario = this.storage.getStorage('TipoUsuario');
+  permisosUsuario = Number(this.storage.getStorage('TipoUsuario'));
   Username:string;
   Apellidos:string;
   Nombre:string;
