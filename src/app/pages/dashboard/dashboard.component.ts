@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import Chart from 'chart.js';
+import { ServerSocketService } from 'src/app/service/server-socket.service';
+import { LocalStorageService } from 'src/app/service/local-storage.service';
 
 @Component({
   selector: "app-dashboard",
@@ -15,9 +17,24 @@ export class DashboardComponent implements OnInit {
   public clicked1: boolean = false;
   public clicked2: boolean = false;
 
-  constructor() {}
+  constructor(
+    private serverSocket: ServerSocketService,
+    private storage: LocalStorageService
+  ) {}
 
   ngOnInit() {
+
+    /*if(this.storage.getStorage('clear') != 'true'){  
+      //alert('aqui');    
+      console.log('Se conecto al servidor');
+
+      var usuario = {
+        IdUsuario: this.storage.getStorage('IdUsuario'),
+        Usuario:this.storage.getStorage('User') 
+      };
+      this.serverSocket.emit('ConectarServer',usuario);
+    }*/
+
     var gradientChartOptionsConfigurationWithTooltipBlue: any = {
       maintainAspectRatio: false,
       legend: {

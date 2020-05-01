@@ -4,42 +4,54 @@ class Usuarios {
         this.personas = [];
     }
 
-    agregarPersona(id, nombre, sala) {
-
-        let persona = { id, nombre, sala };
-
-        this.personas.push(persona);
-
+    agregarPersona(id, IdUsuario, Usuario ) {
+        this.personas.push({ id, IdUsuario, Usuario });
         return this.personas;
-
     }
 
     getPersona(id) {
-        let persona = this.personas.filter(persona => persona.id === id)[0];
-
+        var persona = this.personas.filter(persona => {
+            persona.id === id
+        })[0];
         return persona;
     }
+
+    getPersonabyID(id) {
+        var estatus = false;
+        for(var i =0; i < this.personas.length; i++ ){
+
+            if(this.personas[i].IdUsuario == id){
+                estatus = true
+                return this.personas[i].id;
+            }
+        }
+
+        if(!estatus)
+            return null;
+    }
+
+    getPersonabyIDUsuario(id) {
+        for(var i =0; i < this.personas.length; i++ ){
+            if(this.personas[i].id == id)
+                return this.personas[i].IdUsuario;
+        }
+    }
+
 
     getPersonas() {
         return this.personas;
     }
 
-    getPersonasPorSala(sala) {
-        let personasEnSala = this.personas.filter(persona => persona.sala === sala);
-        return personasEnSala;
-    }
-
     borrarPersona(id) {
-
-        let personaBorrada = this.getPersona(id);
-
+        
+        var personaBorrada = this.personas.filter(persona => persona.id === id);//this.getPersona(id);
         this.personas = this.personas.filter(persona => persona.id != id);
-
-        return personaBorrada;
-
+        if(Object.entries(personaBorrada).length != 0)
+        {     
+            return personaBorrada[0].Usuario;
+        }else
+            return null;
     }
-
-
 }
 
 

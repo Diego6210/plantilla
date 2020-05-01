@@ -3,6 +3,7 @@ import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ServerService } from 'src/app/service/server.service';
 import { environment } from 'src/environments/environment';
+import { ServerSocketService } from 'src/app/service/server-socket.service';
 
 @Component({
   selector: 'app-mensages',
@@ -14,6 +15,7 @@ export class MensagesComponent implements OnInit {
   constructor(
     private storage: LocalStorageService,
     private modalService: NgbModal,
+    private serverSocket: ServerSocketService,
     private server:ServerService
   ) {
     this.Username = this.storage.getStorage('User');
@@ -24,6 +26,7 @@ export class MensagesComponent implements OnInit {
   Username:string;
   IdUsername:string
   UsernameSend:string = null;
+  IdUserSend:string = null;
   UserimgSend:string;
   Mensajes = [];
   Usuarios =[];
@@ -38,24 +41,34 @@ export class MensagesComponent implements OnInit {
 
 
   SendMenssege(){
-    this.server.setChatMensaje(this.IdUsername,this.IdChat,this.Mensaje).subscribe((data) =>{ 
-      this.Mensajes.push({
-        usuario:this.IdUsername,
-        message:this.Mensaje
+    if(this.Mensaje != '' ||this.Mensaje != null || this.Mensaje.trim())
+    {
+      this.server.setChatMensaje(this.IdUsername,this.IdChat,this.Mensaje).subscribe((data) =>{ 
+        this.Mensajes.push({
+          usuario:this.IdUsername,
+          message:this.Mensaje
+        });
+
+        this.serverSocket.emit('enviarMensaje',{
+          IdUsuario:this.IdUserSend,
+          Mensaje:this.Mensaje,
+          Usuario:this.Username
+        });
+
+        this.Mensaje = '';
       });
-  
-      this.Mensaje = '';
-    });
+    }
   }
 
-  selectUser(Userselect,UserselectImg,IdChat){
+  selectUser(Userselect,UserselectImg,IdUserSend,IdChat){
     this.UsernameSend = Userselect;
+    this.IdUserSend = IdUserSend;
     this.UserimgSend= UserselectImg;
     this.IdChat = IdChat;
 
     this.server.getChatsMensajes(IdChat).subscribe((data) => {
       this.Mensajes = []
-      console.log(data);
+      //console.log(data);
       for(let i = 0; i < data['Chats'].length; i++){
 
         this.Mensajes.push({
@@ -65,6 +78,14 @@ export class MensagesComponent implements OnInit {
 
         });
       }
+    });
+
+    this.serverSocket.listen('mensajePrivado').subscribe((data) => {  
+      this.Mensajes.push({
+        usuario:data['IdUsuario'],
+        message:data['Mensaje']
+
+      });
     });
 
   }

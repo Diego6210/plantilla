@@ -4,6 +4,7 @@ import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { ServerService } from 'src/app/service/server.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2'
+import { ServerSocketService } from 'src/app/service/server-socket.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private serverSocket: ServerSocketService,
     private storage: LocalStorageService,
     private server:ServerService
   ) { }
@@ -49,12 +51,32 @@ export class LoginComponent implements OnInit {
         });
       } else
       {
+        
+/*
+        this.serverSocket.listen('connect').subscribe((data) => {
+          console.log('Se conecto al servidor');
+          alert('se conecto')
+          
+          var usuario = {
+            IdUsuario: data['Usuario'][0].IdUsuario,
+            Usuario: this.Username
+          };
+
+          this.serverSocket.emit('ConectarServer',usuario);
+        }); */
+
         this.router.navigateByUrl('dashboard');
         this.storage.setStorage('User', this.Username);
         this.storage.setStorage('Img', this.url+'imagen/' + data['Usuario'][0].Img);  
         this.storage.setStorage('IdUsuario', data['Usuario'][0].IdUsuario);  
         this.storage.setStorage('TipoUsuario', data['Usuario'][0].IdTipoUsuario);  
-        this.storage.setStorage('Email', data['Usuario'][0].Email);  
+        this.storage.setStorage('Email', data['Usuario'][0].Email);       
+        this.storage.setStorage('clear', false);   
+        var usuario = {
+          IdUsuario: data['Usuario'][0].IdUsuario,
+          Usuario:this.storage.getStorage('User') 
+        };
+        this.serverSocket.emit('ConectarServer',usuario);  
       }    
     });
   }

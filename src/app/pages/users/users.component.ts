@@ -6,6 +6,7 @@ import { ServerService } from 'src/app/service/server.service';
 import Swal from 'sweetalert2'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-users',
@@ -15,6 +16,8 @@ import { MatTableDataSource } from '@angular/material/table';
 export class UsersComponent implements OnInit {
 
   private url: string = environment.Server+'imagen/';
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   dataSource = null;
 
@@ -155,6 +158,8 @@ export class UsersComponent implements OnInit {
 
         this.dataSource = new MatTableDataSource(this.Usuarios);
         this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
     });
   }
 

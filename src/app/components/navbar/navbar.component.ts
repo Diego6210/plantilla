@@ -4,6 +4,7 @@ import { Location } from "@angular/common";
 import { Router } from "@angular/router";
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
+import { ServerSocketService } from 'src/app/service/server-socket.service';
 
 @Component({
   selector: "app-navbar",
@@ -27,11 +28,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
     location: Location,
     private element: ElementRef,
     private router: Router,
+    private serverSocket: ServerSocketService,
     private modalService: NgbModal,
     private storage: LocalStorageService,
   ) {
     this.location = location;
     this.sidebarVisible = false;
+    if(this.storage.getStorage('clear') == 'true')
+      this.router.navigateByUrl('login');
   }
 
 
@@ -205,7 +209,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   LogOut(){
-    this.router.navigateByUrl('login');
+    this.serverSocket.emit('cerrarSession','');
+    
+    this.storage.cleaStorage();
+    this.storage.setStorage('clear', true);
+    this.router.navigateByUrl('login'); 
   }
 
   Perfile()

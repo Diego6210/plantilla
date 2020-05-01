@@ -32,6 +32,7 @@ import { AssignTasksComponent } from './pages/assign-tasks/assign-tasks.componen
 
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
     FormsModule,
     BrowserModule,
     HttpClientModule,

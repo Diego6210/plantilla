@@ -18,4 +18,8 @@ export class LocalStorageService {
   removeStorage(Campo:string){
     localStorage.removeItem(Campo);
   }
+
+  cleaStorage(){
+    localStorage.clear();
+  }
 }

@@ -117,7 +117,9 @@ app.post('/Usuario/setUsuarioModificar', function(req, res) {
 app.post('/Usuario/setDeleteUsuario', function(req, res) {
     
     let body = req.body;
-    
+
+    connection.query(`DELETE FROM Chats_Mensajes WHERE IdUsuario = ${body.IdUsuario}`,function(err,data){});
+    connection.query(`DELETE FROM Tareas WHERE IdUsuario = ${body.IdUsuario}`,function(err,data){});
     connection.query(`DELETE FROM Usuario WHERE IdUsuario = ${body.IdUsuario}`,function(err,data)     {
 
         if(err) {            
