@@ -21,5 +21,7 @@ app.use(require('./Routes/router'));
 
 
 server.listen(process.env.PORT, () =>{
-    console.log("Corriendo en el puerto 3000")
+    if (err) throw new Error(err);
+
+    console.log(`Servidor corriendo en puerto ${ port }`);
 });
