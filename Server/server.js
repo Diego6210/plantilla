@@ -10,7 +10,7 @@ const http = require('http');
 const app = express();
 let server = http.createServer(app);
 module.exports.io = socketIO(server);
-require('./Socket/socket');
+require('./Socket/Socket');
 
 
 
@@ -21,7 +21,5 @@ app.use(require('./Routes/router'));
 
 
 server.listen(process.env.PORT, () =>{
-    if (err) throw new Error(err);
-
-    console.log(`Servidor corriendo en puerto ${ port }`);
+    console.log(`Servidor corriendo en puerto ${ process.env.PORT }`);
 });

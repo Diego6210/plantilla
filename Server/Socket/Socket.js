@@ -1,6 +1,5 @@
 const { io } = require('../server');
-const { Usuarios } = require('../classes/Classe_Usuario');
-const { crearMensaje } = require('../classes/Classe_Mensaje');
+const { Usuarios } = require('../Classes/Classe_Usuario');
 
 
 const usuarios = new Usuarios();
