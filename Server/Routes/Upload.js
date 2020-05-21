@@ -40,7 +40,8 @@ app.post('/upload/:id', (req, res) => {
 
     let nombreArchivo = `${ id }.${ extension }`;
 
-    archivo.mv(`Server/Image/${ nombreArchivo }`, (err) => {
+    archivo.mv(`Image/${ nombreArchivo }`, (err) => {
+//        archivo.mv(`Server/Image/${ nombreArchivo }`, (err) => {
 
         if (err)
             return res.status(500).json({
